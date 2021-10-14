@@ -1,0 +1,31 @@
+class Solution {
+    public String reverseWords(String s) {
+     if(s == null || s.length() == 0){
+            return s;
+        }
+        char[] srr = s.toCharArray();
+        int left = 0, right = srr.length - 1;
+        while(left < srr.length && srr[left] == ' '){  //pop out the space at the begining
+            left++;
+        }
+        while(right >= 0 && srr[right] == ' '){  //pop out the space at the end
+            right--;
+        }
+        int start = 0;
+        for(int i = left; i <= right; i++){
+            if(srr[i] == ' '){  //meet a word, reverse ops
+                reverse(srr, start, i - 1);
+                start = i + 1;
+            }
+        }
+        reverse(srr, start, right);   //reverse the last word
+        return new String(srr);
+    }
+    private void reverse(char[] srr, int left, int right){
+        while(left < right){
+            char c = srr[left];
+            srr[left] = srr[right];
+            srr[right] = c;
+            left++; right--;
+        }
+    } }
